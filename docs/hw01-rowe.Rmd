@@ -1,0 +1,50 @@
+---
+title: Prior Art for Precipitation
+author: Brian Rowe
+output: pdf_document
+bibliography: biblio.bib
+date: 2025-01-30
+---
+
+
+# Technique 1
+Describe the first technique discussed. Find a number of papers that all
+utilize a similar technique, e.g., rain bucket.
+
+## Methodology
+Describe the methodology for measuring precipitation. Cite the papers.
+What are some of the differences between the papers?
+
+Describe the characteristics of the methodology:
+
+- what is measured?
+- how often are measurements taken?
+- under what conditions is the technique valid? (e.g., can a rain bucket be used below freezing? Can satellite tell the difference between rain and snow?)
+- how are data recorded?
+
+## Performance
+Discuss the performance of the technique. Use concrete data from the papers
+you found, such as @wilson1979radar.
+This is technique specific,
+but for precipitation measurement, presumably it will be tied to 
+
+- instrument precision
+- resolution (e.g., for satellite it might be a grid size in degrees, whereas for a rain bucket it is a single point -- or is it?)
+
+## Limitations
+
+Use concrete data based on the research papers you found in this section.
+
+- is there an upper bound to the precision or accuracy of the technique? This is tied to the performance section above
+- how can the approach fail?
+  - are there mechanical parts that can break?
+  - is a power supply required?
+  - is anything susceptible to physical damage?
+- can the approach be used in an automated fashion?
+- is the cost reasonable or expensive?
+- are there requirements (like a network signal) that make the approach infeasible in certain locations?
+
+# Technique 2
+...
+
+# References
