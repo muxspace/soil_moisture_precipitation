@@ -1,0 +1,96 @@
+---
+title: "Experiment Design for Estimating Precipitation Using Capacitive Soil Moisture Sensors"
+author: Harish Chinta
+date: 2025-02-15
+output: pdf_document
+---
+
+## Introduction
+This experiment aims to determine the effectiveness of capacitive soil moisture sensors in estimating precipitation by designing a reproducible methodology and analyzing the collected data.
+
+## Methodology
+### Experimental Setup
+1.	Materials Required:
+-	Capacitive soil moisture sensors (at least three for redundancy)
+-	Microcontroller (e.g., Arduino or Raspberry Pi) for data logging
+-	A weighing scale (to track the mass of water added)
+-	A graduated cylinder (to ensure precise water measurement)
+-	Soil-filled containers (identical in volume and soil type)
+-	A controlled water dispensing system (e.g., a drip irrigation system or a calibrated spray bottle)
+-	A weatherproof housing for sensors (if conducted outdoors)
+-	Environmental sensors (optional, for temperature, humidity, and wind speed)
+2.	Procedure:
+-	Place the capacitive soil moisture sensors at consistent depths (e.g., 5 cm and 10 cm) within the soil in each container.
+-	Calibrate the sensors using dry soil and fully saturated soil to establish baseline readings.
+-	Introduce precipitation by adding a measured amount of water to each container at regular intervals (e.g., 10 mL every 5 minutes) using a controlled system to mimic rainfall.
+-	Record sensor readings before water is added and at fixed time intervals after (e.g., every minute for the first 15 minutes, then every 10 minutes for an hour).
+-	Measure soil weight before and after water addition to verify water retention.
+-	Repeat the experiment under varying conditions (different soil types, ambient temperatures, and humidity levels) to assess reproducibility.
+-	Control for evaporation by conducting experiments in a shaded environment when necessary.
+3.	Variables to Track:
+-	Independent Variables:
+*	Amount of water added (mL)
+*	Time of water addition (timestamp)
+*	Soil type (sandy, loamy, clayey)
+*	Environmental factors (temperature, humidity)
+-	Dependent Variables:
+*	Capacitive sensor readings (unitless, typically 0–1023 in raw ADC values)
+*	Soil weight before and after water addition (grams)
+	Rate of moisture absorption over time (computed)
+4. Dataset Structure:
+The dataset will capture critical variables required to assess the impact of precipitation on soil moisture using capacitive soil moisture sensors. Each observation will reflect a specific point in time during the experiment, providing comprehensive data for analysis.
+Variables in the Dataset:
+Variable	      Type	      Description
+Timestamp	    DateTime	    Exact date and time of the reading
+Sensor_ID	    Integer	      Unique identifier for each soil moisture sensor
+Precipitation_mm	Float	    Amount of water added (mm) at the time of measurement
+Soil_Temperature_C	Float	  Soil temperature (°C) at the time of reading
+Soil_Moisture_%	Float	      Measured soil moisture content (%) from the capacitive sensor
+ADC_Value	    Integer	      Raw ADC value from the soil moisture sensor
+Water_Level_mm	Float	      Water table level in mm (if applicable)
+Ambient_Temp_C	Float	      Ambient air temperature (°C) during the reading
+Humidity_%	    Float	      Relative humidity (%) at the time of measurement
+
+Example Dataset:
+Timestamp	Sensor_ID	Precipitation_mm	Soil_Temperature_C	Soil_Moisture_%	ADC_Value	Water_Level_mm	Ambient_Temp_C Humidity_%
+2024-02-15 09:00:00	1	0.0	18.5	12.3	720	0.0	19.0	45
+2024-02-15 09:10:00	1	5.0	18.3	25.7	640	5.0	18.9	48
+2024-02-15 09:20:00	1	10.0	18.0	38.1	570	10.0	18.5	50
+2024-02-15 09:30:00	1	15.0	17.8	50.6	490	15.0	18.2	52
+2024-02-15 09:40:00	1	20.0	17.5	62.4	420	20.0	18.0	54
+
+ Key Points:
+•	ADC_Value decreases as Soil_Moisture_% increases (typical behavior of capacitive soil moisture sensors).
+•	Precipitation_mm tracks water introduction over time.
+•	Soil_Temperature_C, Ambient_Temp_C, and Humidity_% help assess environmental impacts on the readings.
+
+## Model for Estimating Precipitation
+The collected data will be used to develop a regression model predicting precipitation based on soil moisture changes.
+We will use a simple linear regression model to estimate precipitation based on the change in soil moisture:
+Precipitation = β0 + β1 * ΔSoilMoisture
+where `ΔSoilMoisture` is the difference between the current and initial soil moisture levels.
+
+### Assumptions
+- Soil moisture increase is directly proportional to precipitation volume.
+- Soil properties remain consistent throughout the experiment.
+- External factors such as wind and uneven water distribution are negligible.
+- The controlled environment minimizes the impact of other factors on soil moisture (e.g., evaporation). 
+
+### Error Metrics
+To assess the model's effectiveness, we will use:
+- **Root Mean Square Error (RMSE)**: Measures average deviation between predicted and actual precipitation.
+- **Mean Absolute Error (MAE)**: Evaluates the absolute differences between predictions and real values.
+- **R-Squared (R²)**: Determines how well moisture sensor readings explain precipitation variability.
+
+## Limitations
+- Variations in soil composition can impact moisture absorption rates.
+- Evaporation and lateral water movement may affect accuracy.
+-The model's accuracy may be limited by the linearity assumption and potential sensor inaccuracies. 
+- The controlled environment may not fully represent real-world conditions. 
+- The experiment does not account for factors like soil type, vegetation, and evapotranspiration, which can influence soil moisture. 
+
+## Hypothesis
+Based on research, we hypothesize that capacitive soil moisture sensors can estimate precipitation with an accuracy exceeding 85% when calibrated properly. However, performance may decline under conditions of light rainfall due to slower moisture absorption.
+
+## Conclusion
+This experiment provides a structured, reproducible methodology to evaluate the effectiveness of soil moisture sensors in precipitation estimation. The findings will be instrumental in optimizing sensor-based rainfall monitoring systems.
